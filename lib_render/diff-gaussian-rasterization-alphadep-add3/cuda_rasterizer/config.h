@@ -11,6 +11,7 @@
 
 #ifndef CUDA_RASTERIZER_CONFIG_H_INCLUDED
 #define CUDA_RASTERIZER_CONFIG_H_INCLUDED
+#include <cstdint>
 
 #define NUM_CHANNELS 6 // Default 3, RGB
 #define BLOCK_X 16

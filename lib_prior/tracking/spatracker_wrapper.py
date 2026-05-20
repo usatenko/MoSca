@@ -309,12 +309,15 @@ def spatracker_process_folder(
 
     # efficient viz
     viz_choice = np.random.choice(tracks.shape[1], min(tracks.shape[1], max_viz_cnt))
-    vis.visualize(
-        video=video_pt,
-        tracks=tracks[None, :, viz_choice, :2],
-        visibility=visibility[None, :, viz_choice],
-        filename=f"{save_name}_spatracker_tap",
-    )
+    try:
+        vis.visualize(
+            video=video_pt,
+            tracks=tracks[None, :, viz_choice, :2],
+            visibility=visibility[None, :, viz_choice],
+            filename=f"{save_name}_spatracker_tap",
+        )
+    except Exception as _e:
+        logging.warning(f"viz skipped (non-fatal): {_e}")
     logging.info(f"Save to {save_dir} with tracks={tracks.shape}")
 
     np.savez_compressed(

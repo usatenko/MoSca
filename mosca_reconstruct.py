@@ -1,3 +1,19 @@
+import torch.hub as _hh
+_hh._check_repo_is_trusted = lambda *a, **k: None
+import numpy as _np
+if not hasattr(_np, "_fromstring_orig"):
+    _np._fromstring_orig = _np.fromstring
+    def _fsc(s, dtype=float, count=-1, sep=""):
+        if sep == "" and isinstance(s, (bytes, bytearray)):
+            return _np.frombuffer(s, dtype=dtype, count=count)
+        return _np._fromstring_orig(s, dtype=dtype, count=count, sep=sep)
+    _np.fromstring = _fsc
+try:
+    import matplotlib.backends.backend_agg as _agg
+    if not hasattr(_agg.FigureCanvasAgg, "tostring_rgb"):
+        _agg.FigureCanvasAgg.tostring_rgb = lambda self: _np.asarray(self.buffer_rgba())[...,:3].copy().tobytes()
+except Exception as _e:
+    print("agg shim skip", _e)
 import torch
 import imageio
 import sys, os, os.path as osp

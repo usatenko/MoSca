@@ -840,7 +840,7 @@ def viz_list_of_colored_points_in_cam_frame(
         -np.deg2rad(pitch_deg), 0, 0, "sxyz"
     )
     T_cw_viz = np.linalg.inv(T_wc_viz)
-    T_cw_viz = torch.from_numpy(T_cw_viz).float().to(device)
+    T_cw_viz = (T_cw_viz if torch.is_tensor(T_cw_viz) else torch.from_numpy(T_cw_viz)).float().to(device)
 
     viz_list = []
     for t in tqdm(range(T)):

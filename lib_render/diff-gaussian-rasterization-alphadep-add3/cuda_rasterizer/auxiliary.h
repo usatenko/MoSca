@@ -12,6 +12,7 @@
 #ifndef CUDA_RASTERIZER_AUXILIARY_H_INCLUDED
 #define CUDA_RASTERIZER_AUXILIARY_H_INCLUDED
 
+#include <cstdint>
 #include "config.h"
 #include "stdio.h"
 

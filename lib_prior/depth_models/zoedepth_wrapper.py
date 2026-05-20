@@ -73,7 +73,7 @@ def process(in_fn, out_fn, viz_fn, model, device):
 
 def get_zoedepth_model(device, type="NK"):
     repo = "isl-org/ZoeDepth"
-    model = torch.hub.load(repo, f"ZoeD_{type}", pretrained=True)
+    model = torch.hub.load(repo, f"ZoeD_{type}", pretrained=True, trust_repo=True)
     model.to(device)
     model.eval()
     return model

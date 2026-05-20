@@ -91,7 +91,7 @@ def __process_frame__(img, out_fn, model, fxfycxcy_pixel=None, default_fov_deg=5
 
 def get_metric3dv2_model(device, version="giant2"):
     assert version in ["giant2", "large", "small"]
-    model = torch.hub.load("yvanyin/metric3d", f"metric3d_vit_{version}", pretrain=True)
+    model = torch.hub.load("yvanyin/metric3d", f"metric3d_vit_{version}", pretrain=True, trust_repo=True)
     model.to(device)
     model.eval()
     return model
